@@ -3,17 +3,17 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:yourapp/ui/view/auth/widgets/login.dart';
-import 'package:yourapp/core/models/yourprojectapi_api.dart';
+import 'package:flutter_app/ui/view/auth/widgets/login.dart';
+import 'package:flutter_app/core/models/api.dart';
 
 final FlutterAppAuth appAuth = FlutterAppAuth();
 final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
 
-// YourProject Api details
+// ConsumeAbpFromFlutterApp Api details
 const DOMAIN =
-    '10.0.2.2:44349'; // 10.0.2.2 used here due to localhost cannot be resolved.
-const CLIENT_ID = 'YourProjectApi_App';
-const CLIENT_SECRET = "SomeSecretValue";
+    '10.0.2.2:44381'; // 10.0.2.2 used here due to localhost cannot be resolved.
+const CLIENT_ID = 'ConsumeAbpFromFlutterApp_FlutterApp';
+const CLIENT_SECRET = "1q2w3e*";
 
 const REDIRECT_URI = 'com.example.app://callback';
 const ISSUER = 'https://$DOMAIN';
@@ -53,7 +53,7 @@ class _AuthState extends State<Auth> {
 
   getUserDetails() async {
     var profileDetails = {};
-    YourProjectAPI.getUserDetails().then(
+    Api.getUserDetails().then(
       (response) {
         if (response.statusCode == 200) {
           profileDetails = jsonDecode(response.body);
@@ -82,7 +82,7 @@ class _AuthState extends State<Auth> {
       );
 
       // Set access token for application
-      YourProjectAPI.accessToken = result.accessToken;
+      Api.accessToken = result.accessToken;
 
       final idToken = parseIdToken(result.idToken);
       final profile = await getUserDetails();
