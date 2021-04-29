@@ -198,6 +198,23 @@ namespace ConsumeAbpFromFlutterApp.IdentityServer
                     corsOrigins: new[] { swaggerRootUrl.RemovePostFix("/") }
                 );
             }
+
+            // Flutter "App" Client
+            var appClientId = configurationSection["ConsumeAbpFromFlutterApp_App:ClientId"];
+            if (!appClientId.IsNullOrWhiteSpace())
+            {
+                var appRootUrl = configurationSection["ConsumeAbpFromFlutterApp_App:RootUrl"].TrimEnd('/');
+
+                await CreateClientAsync(
+                    name: appClientId,
+                    scopes: commonScopes,
+                    grantTypes: new[] { "authorization_code", "client_credentials" },
+                    secret: configurationSection["ConsumeAbpFromFlutterApp_App:ClientSecret"]?.Sha256(),
+                    requireClientSecret: false,
+                    redirectUri: "com.example.app://callback",
+                    corsOrigins: new[] { appRootUrl.RemovePostFix("/") }
+                );
+            }
         }
 
         private async Task<Client> CreateClientAsync(

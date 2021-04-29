@@ -260,3 +260,4 @@ src/ConsumeAbpFromFlutterApp.HttpApi.Host/Logs/*
 src/ConsumeAbpFromFlutterApp.DbMigrator/Logs/*
 src/ConsumeAbpFromFlutterApp.Blazor.Server/Logs/*
 src/ConsumeAbpFromFlutterApp.Blazor.Server.Tiered/Logs/*
+/src/ConsumeAbpFromFlutterApp.HttpApi.Host/tempkey.jwk
